@@ -2,6 +2,7 @@ import { Story, Meta, html, Preview } from '@open-wc/demoing-storybook';
 import { Required, MaxLength, loadDefaultFeedbackMessages } from '@lion/validate';
 import '@lion/fieldset/lion-fieldset.js';
 import '@lion/input/lion-input.js';
+import '@lion/input-datepicker/lion-input-datepicker.js';
 import '@lion/form/lion-form.js';
 
 <Meta title="Forms/Form/Examples" parameters={{ component: 'lion-form' }} />
@@ -63,27 +64,10 @@ This button is only used here to demonstrate the `serializeGroup()` method.
     return html`
       <lion-form id="form2" @submit="${submit}"
         ><form>
-          <lion-fieldset label="Name" name="name">
-            <lion-input
-              name="firstName"
-              label="First Name"
-              .validators=${[new Required(), new MaxLength(15)]}
-            >
-            </lion-input>
-            <lion-input
-              name="lastName"
-              label="Last Name"
-              .validators=${[new Required(), new MaxLength(15)]}
-            >
-            </lion-input>
-            <lion-input
-              name="address"
-              disabled
-              label="Address"
-              .validators=${[new MaxLength(15)]}
-            >
-            </lion-input>
-          </lion-fieldset>
+          <lion-input-datepicker label="Picker" name="picker1">
+          </lion-input-datepicker>
+          <lion-input-datepicker label="Picker" name="picker2" .modelValue="${new Date()}">
+          </lion-input-datepicker>
           <button type="submit">Submit & Reset (if successfully submitted)</button>
           <button type="button" @click=${() => {
             document.querySelector('#form2').resetGroup();

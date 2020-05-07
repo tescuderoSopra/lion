@@ -223,6 +223,10 @@ export class LionCalendar extends LocalizeMixin(LitElement) {
     }
   }
 
+  reset() {
+    this.centralDate = this.__initialCentralDate;
+  }
+
   /**
    * @override
    */
@@ -252,6 +256,7 @@ export class LionCalendar extends LocalizeMixin(LitElement) {
     } else {
       this.__ensureValidCentralDate();
     }
+    this.__initialCentralDate = this.centralDate;
   }
 
   __renderHeader() {
