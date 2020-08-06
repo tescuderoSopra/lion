@@ -38,6 +38,21 @@ describe('ChoiceGroupMixin', () => {
     expect(el.modelValue).to.equal('other');
   });
 
+  it.only('has a single formatted representing the currently checked radio value', async () => {
+    const el = await fixture(html`
+      <choice-group name="gender">
+        <choice-group-input .choiceValue=${'male'}></choice-group-input>
+        <choice-group-input .choiceValue=${'female'} checked></choice-group-input>
+        <choice-group-input .choiceValue=${'other'}></choice-group-input>
+      </choice-group>
+    `);
+    expect(el.formattedValue).to.equal('female');
+    el.formElements[0].checked = true;
+    expect(el.formattedValue).to.equal('male');
+    el.formElements[2].checked = true;
+    expect(el.formattedValue).to.equal('other');
+  });
+
   it('throws if a child element without a modelValue like { value: "foo", checked: false } tries to register', async () => {
     const el = await fixture(html`
       <choice-group name="gender">
@@ -312,7 +327,6 @@ describe('ChoiceGroupMixin', () => {
         </lion-fieldset>
       `);
 
-      await el.updateComplete;
       expect(el.serializedValue).to.eql({
         gender: 'female',
       });
