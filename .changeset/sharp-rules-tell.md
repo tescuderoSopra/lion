@@ -2,4 +2,4 @@
 'providence-analytics': patch
 ---
 
-feat: allow target dependencies via cli
+Allow targeting dependencies via CLI using `--include-target-deps` and `--target-deps-filter` flags.
